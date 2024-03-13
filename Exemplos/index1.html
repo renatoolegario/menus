@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu com Botão e Submenus</title>
+  <!-- Incluindo o Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Reset de estilos */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Container do menu */
+    .menu {
+      position: relative;
+      display: inline-block; /* Alterado para inline-block */
+      background-color: #f7f7f7;
+      border-bottom: 1px solid #ddd;
+	   border-radius: 50%; /* Arredondando as bordas para fazer uma bola */
+    }
+
+    /* Botão do menu */
+	.menu button {
+	  font-size: 16px;
+	  font-weight: bold;
+	  color: #333;
+	  background-color: transparent;
+	  border: none;
+	  cursor: pointer;
+	  outline: none;
+	  padding: 0; /* Removido o preenchimento */
+	  width: 30px; /* Definindo largura */
+	  height: 30px; /* Definindo altura */
+	 
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	}
+
+
+    /* Submenus */
+    .submenu {
+      position: absolute;
+      top: calc(100% + 5px); /* Ajustado para aparecer abaixo do botão */
+      left: 0; /* Ajustado para começar ao lado do botão */
+      list-style: none;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      z-index: 1;
+      
+      transition: opacity 0.5s ease; /* Transição de opacidade */
+      max-height: 0; /* Altura inicial */
+	 
+	  opacity: 1; /* Opacidade inicial */
+      
+    }
+
+    /* Links dos submenus */
+    .submenu li {
+	  position:absolute;
+	  visibility: hidden;
+      display: block; /* Alterado para block para que cada item apareça em uma linha */
+      padding: 10px;
+      font-size: 14px;
+      color: #333;
+      text-align: left;
+      cursor: pointer;
+      border-bottom: 1px solid #ddd; /* Adicionado para separar os itens */
+      white-space: nowrap; /* Impede que os itens do submenu quebrem em várias linhas */
+    }
+
+    /* Mostrar submenu ao clicar no botão */
+    .menu.clicked .submenu {
+	 
+      opacity: 1; /* Alterado para opacidade 1 quando exibido */
+      max-height: 500px; /* Altura máxima para revelar os itens */
+    }
+	
+	 .menu.clicked .submenu li {
+		position:relative;
+		visibility: visible;
+    }
+	
+
+	
+  </style>
+</head>
+<body>
+
+<h1> Modelo 1 </h1>
+  <div class="menu">
+    <!-- Ícone de menu -->
+    <button onclick="toggleSubMenu()">
+      <i class="fas fa-bars" id="menuIcon"></i>
+    </button>
+    <ul class="submenu" id="submenu">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+      <li>Item 4</li>
+      <li>Item 5</li>
+      <li>Item 6</li>
+    </ul>
+  </div>
+
+  <script>
+    function toggleSubMenu() {
+      const menu = document.querySelector('.menu');
+      const submenu = document.querySelector('.submenu');
+      const menuIcon = document.getElementById('menuIcon');
+
+      menu.classList.toggle('clicked');
+      submenu.classList.toggle('clicked'); // Adiciona/remova classe para ativar animação dos itens do submenu
+      menuIcon.className = menuIcon.className === 'fas fa-bars' ? 'fas fa-times' : 'fas fa-bars';
+    }
+	
+	
+  </script>
+  
+
+  
+</body>
+</html>

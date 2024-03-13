@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu com Botão e Submenus</title>
+  <!-- Incluindo o Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Reset de estilos */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Container do menu */
+    .menu {
+      position: relative;
+      display: inline-block; /* Alterado para inline-block */
+      background-color: #f7f7f7;
+      border-bottom: 1px solid #ddd;
+	   border-radius: 50%; /* Arredondando as bordas para fazer uma bola */
+    }
+
+    /* Botão do menu */
+	.menu button {
+	  font-size: 16px;
+	  font-weight: bold;
+	  color: #333;
+	  background-color: transparent;
+	  border: none;
+	  cursor: pointer;
+	  outline: none;
+	  padding: 0; /* Removido o preenchimento */
+	  width: 30px; /* Definindo largura */
+	  height: 30px; /* Definindo altura */
+	 
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	}
+
+
+	
+	
+	.tdMenu {
+	  padding: 10px;
+	  font-size: 14px;
+	  color: #333;
+	  text-align: left;
+	  cursor: pointer;
+	  border-bottom: 1px solid #ddd;
+	  white-space: nowrap;
+	  opacity: 0; /* Inicialmente definido como 0 */
+	  transition: opacity 0.3s ease; /* Adiciona uma transição de opacidade */
+	}
+	
+	.tdMenu.visible {
+	  opacity: 1; /* Quando a classe visible for adicionada, a opacidade é definida como 1 */
+	}
+	
+  </style>
+</head>
+<body>
+
+  
+   <h1>Modelo 2</h1>
+  
+  <table>
+    <tr>
+      <td>
+        <div class="menu">
+          <!-- Ícone de menu -->
+          <button onclick="toggleSubMenu2()">
+            <i class="fas fa-bars" id="menuIcon2"></i>
+          </button>
+        </div>
+      </td>
+      <td>
+        <table>
+          <tr id="menuDesenho"></tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <script>
+  function toggleSubMenu2() {
+    var menuDesenho = document.getElementById("menuDesenho");
+    var menuIcon = document.getElementById("menuIcon2");
+
+    if (menuDesenho.innerHTML === "") {
+      // Se o menuDesenho estiver vazio, adiciona os itens
+      menuDesenho.innerHTML = "";
+      // Função para adicionar cada <td> com atraso
+      function addTDWithDelay(index) {
+        // Adiciona um <td>
+        var td = document.createElement("td");
+        td.className = "tdMenu";
+        td.textContent = "Item " + index;
+        td.id = "bt_" + index;
+
+        // Adicionando um evento de clique para cada item
+        td.addEventListener('click', function() {
+          console.log(td.textContent);
+          toggleSubMenu2();
+        });
+
+        menuDesenho.appendChild(td);
+		td.classList.add('visible');
+        // Se ainda não adicionamos 5 <td>, chama a função novamente após 0.1 segundos
+        if (index < 5) {
+          setTimeout(function() {
+            addTDWithDelay(index + 1);
+          }, 100);
+        }
+      }
+      // Começa a adicionar os <td> com atraso a partir do índice 1
+      addTDWithDelay(1);
+      // Alterna o ícone para o ícone de fechar (X)
+      menuIcon.classList.remove("fa-bars");
+      menuIcon.classList.add("fa-times");
+    } else {
+      // Se o menuDesenho já tiver itens, remove todos os itens
+      menuDesenho.innerHTML = "";
+      // Alterna o ícone para o ícone de menu
+      menuIcon.classList.remove("fa-times");
+      menuIcon.classList.add("fa-bars");
+    }
+  }
+</script>
+
+  
+</body>
+</html>
